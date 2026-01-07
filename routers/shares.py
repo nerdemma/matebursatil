@@ -1,9 +1,32 @@
 from fastapi import APIRouter, HTTPException, Depends
 from typing import List
+import os
 
 from api.models import Cotizacion, CotizacionList
 from services.storage import JSONStorage
 from services.scraper import obtener_informe_merval
+
+
+def _create_storage_from_env():
+    """Factory: choose storage backend based on STORAGE env var.
+
+    - STORAGE=json (default) -> JSONStorage('data/cotizaciones.json')
+    - STORAGE=postgres -> PostgresStorage(DATABASE_URL)
+    """
+    storage_type = os.getenv('STORAGE', 'json').lower()
+    if storage_type == 'postgres':
+        db_url = os.getenv('DATABASE_URL')
+        if not db_url:
+            raise RuntimeError('DATABASE_URL not set for postgres storage')
+        # import lazily so project can run without SQLAlchemy installed
+        try:
+            from services.db import PostgresStorage
+
+            return PostgresStorage(db_url)
+        except Exception as e:
+            # re-raise as runtime error so FastAPI surfaces a clear message
+            raise RuntimeError(f'failed to initialize PostgresStorage: {e}')
+    return JSONStorage('data/cotizaciones.json')
 
 
 router = APIRouter()
@@ -11,7 +34,7 @@ router = APIRouter()
 
 def get_storage() -> JSONStorage:
     # default path; in a more advanced setup this would be injected/configured
-    return JSONStorage('data/cotizaciones.json')
+    return _create_storage_from_env()
 
 
 @router.get('/', response_model=CotizacionList)

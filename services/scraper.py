@@ -51,8 +51,19 @@ if __name__ == '__main__':
 		result = obtener_informe_merval(url)
 		import json
 
-		with open('data/cotizaciones.json', 'w', encoding='utf-8') as f:
-			json.dump(result, f, ensure_ascii=False, indent=2)
-		print(f"{len(result)} cotizaciones exportadas a data/cotizaciones.json")
+		# Preferir almacenar en la base de datos. Si no está configurada, hacer
+		# fallback a JSON para no perder los datos.
+		try:
+			from services.db import PostgresStorage
+			storage = PostgresStorage()
+			storage.write_all(result)
+			print(f"{len(result)} cotizaciones guardadas en la base de datos")
+		except Exception as db_err:
+			# Si ocurre un error al usar la DB, escribir en el archivo JSON como
+			# fallback y mostrar la excepción para diagnóstico.
+			with open('data/cotizaciones.json', 'w', encoding='utf-8') as f:
+				json.dump(result, f, ensure_ascii=False, indent=2)
+			print('No fue posible guardar en la base de datos:', db_err)
+			print(f"{len(result)} cotizaciones exportadas a data/cotizaciones.json (fallback)")
 	except Exception as e:
 		print('Error al obtener cotizaciones:', e)

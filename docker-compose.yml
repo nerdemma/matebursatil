@@ -1,12 +1,30 @@
-version: '3.8'
 services:
-web:
-ports:
-- "8000:8000"
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      # set DATABASE_URL so the web container can connect to the DB service
+      - DATABASE_URL=postgresql://mate:matepass@db:5432/matebursatil
+    command: >
+      uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: mate
+      POSTGRES_PASSWORD: matepass
+      POSTGRES_DB: matebursatil
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
 volumes:
-- .:/app
-environment:
-- PYTHONUNBUFFERED=1
-command: >
-  uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+  postgres_data:
   
