@@ -12,7 +12,7 @@ from fastapi import Depends
 # Configuración via ENV (leer .env automáticamente si existe)
 class Settings(BaseSettings):
     # Ruta al JSON (puede ser absoluta o relativa al proyecto)
-    json_path: Path = Field(Path("data/data.json"), env="MATEBURSATIL_JSON_PATH")
+    json_path: Path = Field(Path("data/cotizaciones.json"), env="MATEBURSATIL_JSON_PATH")
     # Entorno de la aplicación: development / production / test
     env: str = Field("development", env="MATEBURSATIL_ENV")
     # Si true, recarga el JSON en cada petición (útil para desarrollo)
