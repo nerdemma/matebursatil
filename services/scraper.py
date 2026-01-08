@@ -25,6 +25,9 @@ def obtener_informe_merval(url: str, timeout: int = 10) -> List[Dict]:
 			ticker_el = cols[0].find('a')
 			nombre_el = cols[0].find('p')
 
+			from datetime import datetime
+
+			now = datetime.now()
 			stock = {
 				'ticker': ticker_el.text.strip() if ticker_el else cols[0].text.strip(),
 				'nombre': nombre_el.text.strip() if nombre_el else '',
@@ -36,6 +39,9 @@ def obtener_informe_merval(url: str, timeout: int = 10) -> List[Dict]:
 				'alta': cols[6].text.strip(),
 				'precio_cierre': cols[7].text.strip(),
 				'fecha_cierre': cols[8].text.strip(),
+				# campos para evitar duplicados: fecha y hora de la ejecución
+				'fecha': now.strftime('%Y-%m-%d'),
+				'hora': now.strftime('%H:%M:%S'),
 			}
 			data.append(stock)
 		except Exception:

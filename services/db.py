@@ -7,7 +7,10 @@ from sqlalchemy import (
     String,
     Text,
 )
+from sqlalchemy import text
 from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import inspect
+from datetime import datetime
 
 Base = declarative_base()
 
@@ -26,6 +29,27 @@ class CotizacionModel(Base):
     alta = Column(Text)
     precio_cierre = Column(Text)
     fecha_cierre = Column(Text)
+    # campos adicionales para evitar duplicados por ejecución
+    fecha = Column(Text)
+    hora = Column(Text)
+
+
+class CotizacionHistory(Base):
+    __tablename__ = 'cotizaciones_history'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ticker = Column(String(64), index=True, nullable=False)
+    nombre = Column(Text)
+    cotizacion = Column(Text)
+    variacion = Column(Text)
+    volumen = Column(Text)
+    precio_apertura = Column(Text)
+    baja = Column(Text)
+    alta = Column(Text)
+    precio_cierre = Column(Text)
+    fecha_cierre = Column(Text)
+    fecha = Column(Text)
+    hora = Column(Text)
 
 
 class PostgresStorage:
@@ -42,7 +66,7 @@ class PostgresStorage:
 
         self.engine = create_engine(db_url, future=True)
         self.Session = sessionmaker(bind=self.engine)
-        # create tables if they don't exist
+        # create tables if they don't exist (incluye tabla history)
         Base.metadata.create_all(self.engine)
 
     def read_all(self) -> List[Dict]:
@@ -61,6 +85,8 @@ class PostgresStorage:
                     'alta': r.alta,
                     'precio_cierre': r.precio_cierre,
                     'fecha_cierre': r.fecha_cierre,
+                    'fecha': r.fecha,
+                    'hora': r.hora,
                 }
                 for r in rows
             ]
@@ -70,11 +96,27 @@ class PostgresStorage:
     def write_all(self, items: List[Dict]) -> None:
         session = self.Session()
         try:
-            # simple strategy: delete all and bulk-insert
-            session.query(CotizacionModel).delete()
+            # Nueva estrategia: para cada item insertar solo si no existe un
+            # registro con el mismo ticker+fecha+hora (evitar duplicados por ejecución).
             for it in items:
-                obj = CotizacionModel(
-                    ticker=it.get('ticker', ''),
+                now = datetime.now()
+                fecha = it.get('fecha') or now.strftime('%Y-%m-%d')
+                hora = it.get('hora') or now.strftime('%H:%M:%S')
+
+                ticker = it.get('ticker', '')
+                # comprobar si ya existe en la tabla de historiales
+                exists = (
+                    session.query(CotizacionHistory)
+                    .filter(CotizacionHistory.ticker == ticker)
+                    .filter(CotizacionHistory.fecha == fecha)
+                    .filter(CotizacionHistory.hora == hora)
+                    .first()
+                )
+                if exists:
+                    continue
+
+                obj = CotizacionHistory(
+                    ticker=ticker,
                     nombre=it.get('nombre', ''),
                     cotizacion=it.get('cotizacion', ''),
                     variacion=it.get('variacion', ''),
@@ -84,6 +126,8 @@ class PostgresStorage:
                     alta=it.get('alta', ''),
                     precio_cierre=it.get('precio_cierre', ''),
                     fecha_cierre=it.get('fecha_cierre', ''),
+                    fecha=fecha,
+                    hora=hora,
                 )
                 session.add(obj)
             session.commit()
@@ -109,6 +153,8 @@ class PostgresStorage:
                 'alta': r.alta,
                 'precio_cierre': r.precio_cierre,
                 'fecha_cierre': r.fecha_cierre,
+                'fecha': r.fecha,
+                'hora': r.hora,
             }
         finally:
             session.close()
