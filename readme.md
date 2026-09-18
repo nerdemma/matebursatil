@@ -1,16 +1,41 @@
-mercados y valores argentinos
+Mate Bursatil
 -----------------------------
 
-es una api y serie de scripts para el acceso a las ultimas cotizaciones del mercado bursatil
-argentino, la misma es implementada en el lenguaje de programacion python y bash mediante las librerias de scrapping, beautiful soup y expresiones regulares Regex. 
 
-en primera instancia, esta aplicacion es utilizada en la terminal linux/unix la cual puede utilizarse para sus aplicaciones de escritorio.
 
-como funciona?
-al ejecutarse el script get_share.py, el script obtiene las cotizaciones realizando scraping y guardandolo en un archivo .json, este script puede configurarse para obtener las cotizaciones cada cierta cantidad de tiempo preestablecida, mediante el servicio crontrab. 
+Una API para tener al alcance las ultimas cotizaciones del MERVAL a traves de un fichero json, información actualizada cada 10 minutos. 
 
-como obtener la informacion?
-ejecutando el script ./get_marketshare GGAL obtenemos la cotizacion de "Banco Galicia y Buenos Aires" como para tomar un ejemplo, en caso de no encontrar la cotizacion que estamos buscando nos devolvera "No encontrado!". 
+Funcionalidades
+Lista las ultimas cotizaciones el mercado bursatil argentino mediante scraping a la fuente, esto es posible gracias a la libreria beautyful soup en python.  
+
+Instalación
+```
+git clone https://github.com/nerdemma/matebursatil
+cd matebursatil
+./init.sh
+```
+
+
+Obtener Cotizacion Especifica
+Es posible obtener la lista de cotizaciones en general asi como tambien una especifica mediante su simbolo, por ejemplo si quiero obtener la cotización de "Grupo Financiero Galicia" escribo el simbolo GGAL en la solicitud. 
+
+Para obtener todas las cotizaciones. 
+```
+curl -i http://127.0.0.1:8000/shares
+```
+Para solo obtener la cotizacion de un solo titulo especifico.
+```
+curl -i http://127.0.0.1:8000/shares/GGAL
+```
+Dependencias 
+
+fastapi
+uvicorn
+requests
+beautifulsoup4
+pydantic
+pytest
+httpx
 
 Renuncia de Responsabilidad: 
 Esta aplicacion proporciona información con fines educativos e informativos. la cual no constituye asesoramiento financiero, legal o de inversion.
