@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MateBursatil - Cotizaciones del Mercado Argentino</title>
+  
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/tailwind.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="StyleSheet" href="/css/theme.css" type="text/css" />
+
+  
+  
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-opacity-90 border-b border-gray-200 dark:border-gray-800 transition-colors" style="background-color: rgba(var(--bg-card), 0.85);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo & Title -->
+      <div class="flex items-center gap-3">
+        <!-- SVG Logo exact match to image -->
+        <div class="w-11 h-11 flex-shrink-0">
+          <img src="/images/matebursatil_logo.png" alt="MateBursatil logo">
+        </div>
+
+        <div>
+          <div class="flex items-center gap-0.5 text-2xl font-extrabold tracking-tight">
+            <span style="color: var(--text-heading)">Mate</span>
+              <span class="text-mateGreen">Bursatil</span>
+          </div>
+          <p class="text-xs font-medium" style="color: var(--text-muted)">Cotizaciones del Mercado Argentino</p>
+        </div>
+      </div>
+
+      <!-- Header Action Controls -->
+      <div class="flex items-center gap-3">
+      
+        <!-- Live Status Indicator 
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold" style="background-color: var(--badge-bg); color: var(--text-muted);">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-mateGreen opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-mateGreen"></span>
+          </span>
+          Mercado Abierto (BCBA)
+        </div>
+-->
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" aria-label="Cambiar tema" class="p-2.5 rounded-xl border transition-all duration-200 hover:scale-105 active:scale-95 flex items-center justify-center" style="background-color: var(--bg-card); border-color: var(--border-color); color: var(--text-main);">
+          <!-- Sun Icon (for Dark Mode) -->
+          <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <!-- Moon Icon (for Light Mode) -->
+          <svg id="moonIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow space-y-6">
+
+    <!-- 
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="card-panel p-4 rounded-2xl flex justify-between items-center">
+        <div>
+          <span class="text-xs font-medium uppercase tracking-wider block mb-1" style="color: var(--text-muted)">Índice Merval</span>
+          <div class="text-xl font-bold" style="color: var(--text-heading)">1.842.350,12</div>
+          <span class="text-xs font-semibold text-mateGreen">+2.45% hoy</span>
+        </div>
+        <div class="p-3 rounded-xl bg-mateGreen-bg text-mateGreen">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+        </div>
+      </div>
+
+      <div class="card-panel p-4 rounded-2xl flex justify-between items-center">
+        <div>
+          <span class="text-xs font-medium uppercase tracking-wider block mb-1" style="color: var(--text-muted)">Dólar CCL</span>
+          <div class="text-xl font-bold" style="color: var(--text-heading)">$1.245,50</div>
+          <span class="text-xs font-semibold text-mateGreen">+0.82%</span>
+        </div>
+        <div class="p-3 rounded-xl bg-mateGreen-bg text-mateGreen">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+      </div>
+
+      <div class="card-panel p-4 rounded-2xl flex justify-between items-center">
+        <div>
+          <span class="text-xs font-medium uppercase tracking-wider block mb-1" style="color: var(--text-muted)">Dólar MEP</span>
+          <div class="text-xl font-bold" style="color: var(--text-heading)">$1.210,00</div>
+          <span class="text-xs font-semibold text-red-500">-0.35%</span>
+        </div>
+        <div class="p-3 rounded-xl bg-red-500/10 text-red-500">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
+        </div>
+      </div>
+
+      <div class="card-panel p-4 rounded-2xl flex justify-between items-center">
+        <div>
+          <span class="text-xs font-medium uppercase tracking-wider block mb-1" style="color: var(--text-muted)">Riesgo País</span>
+          <div class="text-xl font-bold" style="color: var(--text-heading)">1.284 pb</div>
+          <span class="text-xs font-semibold text-mateGreen">-18 pb</span>
+        </div>
+        <div class="p-3 rounded-xl bg-mateGreen-bg text-mateGreen">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+        </div>
+      </div>
+    </div>
+ -->
+    <div class="card-panel rounded-2xl overflow-hidden shadow-xl">
+      <!-- Toolbar Filter & Search -->
+      <div class="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-800/80 flex flex-col md:flex-row gap-4 items-center justify-between">
+        
+        <!-- Category Tabs -->
+        <div class="flex items-center gap-1.5 p-1 rounded-xl w-full md:w-auto overflow-x-auto" style="background-color: var(--input-bg);">
+          <button class="filter-tab active px-4 py-2 text-xs font-semibold rounded-lg transition-all text-white bg-mateGreen shadow-sm" data-category="ALL">Todos</button>
+          <button class="filter-tab px-4 py-2 text-xs font-semibold rounded-lg transition-all" style="color: var(--text-muted);" data-category="ACCIONES">Acciones</button>
+          </div>
+
+        <!-- Search Input -->
+        <div class="relative w-full md:w-72">
+          <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2" style="color: var(--text-muted)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input 
+            type="text" 
+            id="searchInput"
+            placeholder="Buscar por ticker o empresa..." 
+            class="w-full pl-10 pr-4 py-2 text-sm rounded-xl outline-none focus:ring-2 focus:ring-mateGreen transition-all border"
+            style="background-color: var(--input-bg); color: var(--text-main); border-color: var(--border-color);"
+          />
+        </div>
+
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="text-[11px] font-bold uppercase tracking-wider border-b" style="border-color: var(--border-color); color: var(--text-muted); background-color: var(--badge-bg);">
+              <th class="py-4 px-5">Ticker / Instrumento</th>
+              <th class="py-4 px-4 text-right">Cotización ARS</th>
+              <th class="py-4 px-4 text-right">Variación 24h</th>
+              <th class="py-4 px-4 text-right hidden sm:table-cell">Apertura</th>
+              <th class="py-4 px-4 text-right hidden md:table-cell">Mínimo</th>
+              <th class="py-4 px-4 text-right hidden md:table-cell">Máximo</th>
+              <th class="py-4 px-4 text-right hidden lg:table-cell">Volumen ARS</th>
+              <th class="py-4 px-5 text-center">Acción</th>
+            </tr>
+          </thead>
+          <tbody id="shares-body" class="divide-y" style="border-color: var(--border-color);">
+            <!-- Dynamic Stock Rows will be inserted here -->
+          </tbody>
+        </table>
+
+        <!-- Empty & Status Indicator -->
+        <div id="status" class="py-12 text-center text-sm font-medium" style="color: var(--text-muted);">
+          Cargando cotizaciones del mercado...
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mt-auto border-t text-xs py-6 transition-colors" style="border-color: var(--border-color); color: var(--text-muted); background-color: var(--bg-card);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-sm" style="color: var(--text-heading)">Mate<span class="text-mateGreen">Bursatil</span></span>
+        <span>&copy; 2026 - API & Cotizaciones en Tiempo Real</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="#" class="hover:underline hover:text-mateGreen transition-colors">Documentación API</a>
+        <a href="#" class="hover:underline hover:text-mateGreen transition-colors">Términos del Mercado</a>
+        <a href="#" class="hover:underline hover:text-mateGreen transition-colors">Soporte</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/shares.js"></script>
+  <script src="js/theme.js"></script>
+
+</body>
+</html>

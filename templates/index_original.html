@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MateBursatil - Cotizaciones del Mercado Argentino</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            mateNavy: {
+              DEFAULT: '#0B192C',
+              50: '#f0f4f8',
+              100: '#d9e2ec',
+              800: '#0F2238',
+              900: '#0B192C',
+              950: '#060E1A'
+            },
+            mateGreen: {
+              DEFAULT: '#00B87C',
+              light: '#10B981',
+              hover: '#009a67',
+              <!DOCTYPE html>
+              <html lang="es" data-theme="dark">
+              <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>MateBursatil - Cotizaciones del Mercado Argentino</title>
+                <script src="https://cdn.tailwindcss.com"></script>
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+                <script>
+                  tailwind.config = {
+                    darkMode: ['class', '[data-theme="dark"]'],
+                    theme: {
+                      extend: {
+                        fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+                        colors: {
+                          mateNavy: { DEFAULT: '#0B192C' },
+                          mateGreen: { DEFAULT: '#00B87C', bg: 'rgba(0, 184, 124, 0.12)' }
+                        }
+                      }
+                    }
+                  }
+                </script>
+
+                <style>
+                  :root[data-theme="dark"] {
+                    --bg-main: #070F1B; --bg-card: #0F2238; --bg-card-hover: #162E4A;
+                    --border-color: rgba(255,255,255,0.08); --text-main: #F1F5F9; --text-muted: #94A3B8;
+                    --text-heading: #FFFFFF; --input-bg: #0B192C; --badge-bg: rgba(255,255,255,0.05);
+                  }
+                  :root[data-theme="light"] {
+                    --bg-main: #F4F7FA; --bg-card: #FFFFFF; --bg-card-hover: #F8FAFC;
+                    --border-color: rgba(15,34,56,0.1); --text-main: #1E293B; --text-muted: #64748B;
+                    --text-heading: #0B192C; --input-bg: #F1F5F9; --badge-bg: rgba(11,25,44,0.05);
+                  }
+                  body { background-color: var(--bg-main); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; }
+                  .positive-pill { color: #059669; font-weight:600 }
+                  .negative-pill { color: #dc2626; font-weight:600 }
+                  .ticker-pill { font-weight:700 }
+                </style>
+              </head>
+              <body class="min-h-screen flex flex-col">
+                <header class="border-b" style="border-color: var(--border-color); background-color: var(--bg-card);">
+                  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                      <h1 class="font-bold text-lg" style="color: var(--text-heading)">Mate<span class="text-mateGreen">Bursatil</span></h1>
+                      <div class="text-sm" style="color: var(--text-muted)">Cotizaciones del Mercado Argentino</div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <input id="searchInput" placeholder="Buscar ticker o nombre" class="px-3 py-2 rounded-md" style="background:var(--input-bg); color:var(--text-main);" />
+                      <button id="copyLinkBtn" class="px-3 py-2 rounded-md bg-mateGreen text-white">Copiar link</button>
+                    </div>
+                  </div>
+                </header>
+
+                <main class="flex-1 max-w-7xl mx-auto px-4 py-6 w-full">
+                  <div class="mb-4 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <button class="filter-tab bg-mateGreen text-white px-3 py-1 rounded-md" data-category="ALL">Todos</button>
+                      <button class="filter-tab px-3 py-1 rounded-md" data-category="ACCIONES">Acciones</button>
+                      <button class="filter-tab px-3 py-1 rounded-md" data-category="BONOS">Bonos</button>
+                      <button class="filter-tab px-3 py-1 rounded-md" data-category="CEDEARS">CEDEARS</button>
+                    </div>
+                    <div class="text-sm text-muted" style="color:var(--text-muted)">Total: <span id="totalCount">-</span> · Actualizado: <span id="updatedAt">-</span></div>
+                  </div>
+
+                  <div class="bg-white dark:bg-[var(--bg-card)] rounded-lg shadow-sm overflow-hidden" style="border:1px solid var(--border-color);">
+                    <table class="w-full table-fixed">
+                      <thead class="text-left" style="color:var(--text-muted)">
+                        <tr>
+                          <th class="px-4 py-3">Ticker</th>
+                          <th class="px-4 py-3">Nombre</th>
+                          <th class="px-4 py-3">Cotización</th>
+                          <th class="px-4 py-3">Variación</th>
+                          <th class="px-4 py-3">Volumen</th>
+                          <th class="px-4 py-3">Apertura</th>
+                          <th class="px-4 py-3">Baja</th>
+                          <th class="px-4 py-3">Alta</th>
+                          <th class="px-4 py-3">Cierre</th>
+                        </tr>
+                      </thead>
+                      <tbody id="shares-body">
+                        <!-- Rows injected by JS -->
+                      </tbody>
+                    </table>
+                    <div id="status" class="p-4 text-sm" style="color:var(--text-muted)"></div>
+                  </div>
+                </main>
+
+                <footer class="mt-auto border-t text-xs py-6 transition-colors" style="border-color: var(--border-color); color: var(--text-muted); background-color: var(--bg-card);">
+                  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-sm" style="color: var(--text-heading)">Mate<span class="text-mateGreen">Bursatil</span></span>
+                      <span>&copy; 2026 - API & Cotizaciones en Tiempo Real</span>
+                    </div>
+                    <div class="flex items-center gap-6">
+                      <a href="#" class="hover:underline hover:text-mateGreen transition-colors">Documentación API</a>
+                      <a href="#" class="hover:underline hover:text-mateGreen transition-colors">Términos del Mercado</a>
+                      <a href="#" class="hover:underline hover:text-mateGreen transition-colors">Soporte</a>
+                    </div>
+                  </div>
+                </footer>
+
+                <script>
+                  // Theme and simple UI handlers (keep minimal to match previous behaviour)
+                  const htmlTag = document.documentElement;
+                  const theme = localStorage.getItem('mate_bursatil_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'dark');
+                  htmlTag.setAttribute('data-theme', theme);
+
+                  // Copy link button
+                  const copyLinkBtn = document.getElementById('copyLinkBtn');
+                  if (copyLinkBtn) copyLinkBtn.addEventListener('click', () => { navigator.clipboard?.writeText(window.location.href); });
+                </script>
+
+                <script>
+                  // Script: consume la API real `/shares/` y renderiza la tabla manteniendo el UI existente.
+                  const sharesBody = document.getElementById('shares-body');
+                  const statusDiv = document.getElementById('status');
+                  const searchInput = document.getElementById('searchInput');
+                  const totalCountEl = document.getElementById('totalCount');
+                  const updatedAtEl = document.getElementById('updatedAt');
+                  const filterTabs = document.querySelectorAll('.filter-tab');
+
+                  let currentCategory = 'ALL';
+                  let currentSearchQuery = '';
+
+                  function formatVariation(raw) {
+                    if (!raw) return '0%';
+                    return String(raw).trim();
+                  }
+
+                  function variationIsPositive(raw) {
+                    const value = String(raw || '0').trim().replace('%', '').replace(',', '.');
+                    const num = parseFloat(value);
+                    if (Number.isNaN(num)) return true;
+                    return num >= 0;
+                  }
+
+                  function renderRows(items) {
+                    if (!items || items.length === 0) {
+                      sharesBody.innerHTML = '';
+                      statusDiv.textContent = 'No hay cotizaciones disponibles.';
+                      return;
+                    }
+
+                    const filtered = items.filter(i => {
+                      if (currentCategory === 'ALL') return true;
+                      return (i.category || '').toUpperCase() === currentCategory;
+                    });
+
+                    const rows = filtered.map(item => {
+                      const variation = formatVariation(item.variacion);
+                      const positive = variationIsPositive(item.variacion);
+                      const pillClass = positive ? 'positive-pill' : 'negative-pill';
+
+                      return `
+                        <tr>
+                          <td class="px-4 py-3"><span class="ticker-pill">${item.ticker || '-'}</span></td>
+                          <td class="px-4 py-3">${item.nombre || '-'}</td>
+                          <td class="px-4 py-3">${item.cotizacion || '-'}</td>
+                          <td class="px-4 py-3"><span class="variation-pill ${pillClass}">${variation}</span></td>
+                          <td class="px-4 py-3">${item.volumen || '-'}</td>
+                          <td class="px-4 py-3">${item.precio_apertura || '-'}</td>
+                          <td class="px-4 py-3">${item.baja || '-'}</td>
+                          <td class="px-4 py-3">${item.alta || '-'}</td>
+                          <td class="px-4 py-3">${item.precio_cierre || '-'}</td>
+                        </tr>
+                      `;
+                    }).join('');
+
+                    sharesBody.innerHTML = rows;
+                    statusDiv.textContent = '';
+                  }
+
+                  async function loadShares() {
+                    try {
+                      const q = encodeURIComponent(currentSearchQuery || '');
+                      const url = q ? `/shares/?q=${q}` : '/shares/';
+                      const resp = await fetch(url);
+                      if (!resp.ok) throw new Error('API error');
+                      const payload = await resp.json();
+                      const items = payload.items || [];
+
+                      if (payload.meta) {
+                        if (totalCountEl) totalCountEl.textContent = String(payload.meta.totalCount || items.length);
+                        if (updatedAtEl && payload.meta.last_updated) {
+                          const d = new Date(payload.meta.last_updated);
+                          updatedAtEl.textContent = d.toLocaleString('es-AR');
+                        }
+                      } else {
+                        if (totalCountEl) totalCountEl.textContent = String(items.length);
+                      }
+
+                      renderRows(items);
+                    } catch (err) {
+                      console.error(err);
+                      statusDiv.textContent = 'Error al cargar la API de cotizaciones.';
+                    }
+                  }
+
+                  let searchTimeout = null;
+                  if (searchInput) searchInput.addEventListener('input', (e) => {
+                    currentSearchQuery = e.target.value;
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(loadShares, 250);
+                  });
+
+                  filterTabs.forEach(tab => tab.addEventListener('click', (e) => {
+                    filterTabs.forEach(t => t.classList.remove('bg-mateGreen', 'text-white', 'shadow-sm'));
+                    const btn = e.currentTarget;
+                    btn.classList.add('bg-mateGreen', 'text-white', 'shadow-sm');
+                    currentCategory = btn.getAttribute('data-category') || 'ALL';
+                    loadShares();
+                  }));
+
+                  loadShares();
+                  setInterval(loadShares, 600000);
+                </script>
+              </body>
+              </html>
+
+    // Initialize Theme preference
+    const savedTheme = localStorage.getItem('mate_bursatil_theme') || 
+                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme(savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const activeTheme = htmlTag.getAttribute('data-theme');
+      applyTheme(activeTheme === 'dark' ? 'light' : 'dark');
+    });
+
+    const sharesBody = document.getElementById('shares-body');
+    const statusDiv = document.getElementById('status');
+    const searchInput = document.getElementById('searchInput');
+
+    function formatNumber(num) {
+      return new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num);
+    }
+
+    function renderTable() {
+      const filteredData = marketData.filter(item => {
+        const matchesCategory = currentCategory === 'ALL' || item.category === currentCategory;
+        const matchesSearch = item.ticker.toLowerCase().includes(currentSearchQuery.toLowerCase()) || 
+                              item.name.toLowerCase().includes(currentSearchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filteredData.length === 0) {
+        sharesBody.innerHTML = '';
+        statusDiv.style.display = 'block';
+        statusDiv.innerText = 'No se encontraron resultados para los filtros seleccionados.';
+        return;
+      }
+
+      statusDiv.style.display = 'none';
+
+      sharesBody.innerHTML = filteredData.map(item => {
+        const isPositive = item.change >= 0;
+        const changeClass = isPositive ? 'text-mateGreen font-semibold' : 'text-red-500 font-semibold';
+        const changeSign = isPositive ? '+' : '';
+        const badgeBg = isPositive ? 'bg-mateGreen-bg text-mateGreen' : 'bg-red-500/10 text-red-500';
+
+        return `
+          <tr class="tr-hover text-sm">
+            <td class="py-4 px-5">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-xs" style="background-color: var(--badge-bg); color: var(--text-heading); border: 1px solid var(--border-color)">
+                  ${item.ticker.substring(0, 3)}
+                </div>
+                <div>
+                  <div class="font-bold tracking-tight" style="color: var(--text-heading)">${item.ticker}</div>
+                  <div class="text-xs truncate max-w-[160px] sm:max-w-[220px]" style="color: var(--text-muted)">${item.name}</div>
+                </div>
+              </div>
+            </td>
+            <td class="py-4 px-4 text-right font-bold" style="color: var(--text-heading)">
+              $${formatNumber(item.price)}
+            </td>
+            <td class="py-4 px-4 text-right">
+              <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs ${badgeBg}">
+                ${changeSign}${item.change.toFixed(2)}%
+              </span>
+            </td>
+            <td class="py-4 px-4 text-right hidden sm:table-cell" style="color: var(--text-muted)">
+              $${formatNumber(item.open)}
+            </td>
+            <td class="py-4 px-4 text-right hidden md:table-cell" style="color: var(--text-muted)">
+              $${formatNumber(item.low)}
+            </td>
+            <td class="py-4 px-4 text-right hidden md:table-cell" style="color: var(--text-muted)">
+              $${formatNumber(item.high)}
+            </td>
+            <td class="py-4 px-4 text-right hidden lg:table-cell font-mono text-xs" style="color: var(--text-muted)">
+              $${item.volume}
+            </td>
+            <td class="py-4 px-5 text-center">
+              <button class="p-2 rounded-lg transition-all hover:bg-mateGreen hover:text-white" style="color: var(--text-muted)" title="Ver gráfico">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+                </svg>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Category Tabs click listeners
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-tab').forEach(t => {
+          t.classList.remove('bg-mateGreen', 'text-white', 'shadow-sm');
+          t.style.color = 'var(--text-muted)';
+        });
+
+        const activeBtn = e.target;
+        activeBtn.classList.add('bg-mateGreen', 'text-white', 'shadow-sm');
+        activeBtn.style.color = '#FFFFFF';
+        
+        currentCategory = activeBtn.getAttribute('data-category');
+        renderTable();
+      });
+    });
+
+    // Search input listener
+    searchInput.addEventListener('input', (e) => {
+      currentSearchQuery = e.target.value;
+      renderTable();
+    });
+
+    // Initial table render
+    window.onload = () => {
+      renderTable();
+    };
+  </script>
+</body>
+</html>

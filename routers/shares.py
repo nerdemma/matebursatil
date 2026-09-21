@@ -1,5 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends
-from typing import List
+from typing import List, Dict, Any
+import os
+from datetime import datetime
 
 from api.models import Cotizacion, CotizacionList
 from services.storage import JSONStorage
@@ -14,13 +16,30 @@ def get_storage() -> JSONStorage:
     return JSONStorage('data/cotizaciones.json')
 
 
-@router.get('/', response_model=CotizacionList)
-def list_shares(limit: int = 200, q: str = '', storage: JSONStorage = Depends(get_storage)):
+@router.get('/')
+def list_shares(limit: int = 200, q: str = '', storage: JSONStorage = Depends(get_storage)) -> Dict[str, Any]:
+    """Return a JSON object with `items` and non-breaking `meta` metadata so
+    the dashboard can consume summary info without frontend changes.
+    """
     items = storage.read_all()
     if q:
         q_lower = q.lower()
-        items = [i for i in items if q_lower in (i.get('ticker','') + i.get('nombre','')).lower()]
-    return {'items': items[:limit]}
+        items = [i for i in items if q_lower in (i.get('ticker', '') + i.get('nombre', '')).lower()]
+
+    sliced = items[:limit]
+
+    # metadata: total count and last update timestamp (from file mtime when available)
+    meta: Dict[str, Any] = {'totalCount': len(items)}
+    try:
+        path = storage.path
+        if os.path.exists(path):
+            mtime = os.path.getmtime(path)
+            meta['last_updated'] = datetime.fromtimestamp(mtime).isoformat()
+    except Exception:
+        # don't fail the request if metadata cannot be computed
+        pass
+
+    return {'items': sliced, 'meta': meta}
 
 
 @router.get('/{ticker}', response_model=Cotizacion)
@@ -31,14 +50,3 @@ def get_share(ticker: str, storage: JSONStorage = Depends(get_storage)):
     return item
 
 
-@router.post('/refresh')
-def refresh(storage: JSONStorage = Depends(get_storage)):
-    url = 'https://www.portfoliopersonal.com/Cotizaciones/Acciones'
-    try:
-        data = obtener_informe_merval(url)
-        if not data:
-            raise HTTPException(status_code=503, detail='No data from scraper')
-        storage.write_all(data)
-        return {'imported': len(data)}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))

@@ -1,0 +1,62 @@
+
+    :root[data-theme="dark"] {
+      --bg-main: #070F1B;
+      --bg-card: #0F2238;
+      --bg-card-hover: #162E4A;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
+      --text-heading: #FFFFFF;
+      --logo-navy: #38BDF8;
+      --input-bg: #0B192C;
+      --badge-bg: rgba(255, 255, 255, 0.05);
+    }
+
+    :root[data-theme="light"] {
+      --bg-main: #F4F7FA;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F8FAFC;
+      --border-color: rgba(15, 34, 56, 0.1);
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --text-heading: #0B192C;
+      --logo-navy: #0B192C;
+      --input-bg: #F1F5F9;
+      --badge-bg: rgba(11, 25, 44, 0.05);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .card-panel {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .tr-hover {
+      transition: background-color 0.15s ease;
+    }
+    .tr-hover:hover {
+      background-color: var(--bg-card-hover);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.25);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.4);
+    }
