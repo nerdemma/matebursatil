@@ -69,8 +69,7 @@
             <td class="py-4 px-4 text-right hidden md:table-cell" style="color: var(--text-muted)">$${formatNumber(lowRaw)}</td>
             <td class="py-4 px-4 text-right hidden md:table-cell" style="color: var(--text-muted)">$${formatNumber(highRaw)}</td>
             <td class="py-4 px-4 text-right hidden lg:table-cell font-mono text-xs" style="color: var(--text-muted)">${volume}</td>
-            <td class="py-4 px-5 text-center"><button class="p-2 rounded-lg transition-all hover:bg-mateGreen hover:text-white" style="color: var(--text-muted)" title="Ver gráfico"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg></button></td>
-          </tr>
+            </tr>
         `;
       }).join('');
     }
