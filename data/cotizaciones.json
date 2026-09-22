@@ -9,7 +9,7 @@
     "baja": "850,00",
     "alta": "867,50",
     "precio_cierre": "856,50",
-    "fecha_cierre": "20:12"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "ALUAC",
@@ -21,7 +21,7 @@
     "baja": "0,54",
     "alta": "0,55",
     "precio_cierre": "0,54",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "ALUAD",
@@ -33,7 +33,7 @@
     "baja": "0,55",
     "alta": "0,56",
     "precio_cierre": "0,56",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "BBAR",
@@ -45,7 +45,7 @@
     "baja": "7.555,00",
     "alta": "7.750,00",
     "precio_cierre": "7.610,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "BBARC",
@@ -57,7 +57,7 @@
     "baja": "4,81",
     "alta": "4,81",
     "precio_cierre": "4,75",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "BBARD",
@@ -69,7 +69,7 @@
     "baja": "4,84",
     "alta": "5,02",
     "precio_cierre": "4,96",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "BMA",
@@ -81,7 +81,7 @@
     "baja": "11.930,00",
     "alta": "12.200,00",
     "precio_cierre": "12.060,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "BMA.C",
@@ -93,7 +93,7 @@
     "baja": "0,00",
     "alta": "0,00",
     "precio_cierre": "7,55",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "BMA.D",
@@ -105,7 +105,7 @@
     "baja": "7,76",
     "alta": "7,92",
     "precio_cierre": "7,79",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "BYMA",
@@ -117,7 +117,7 @@
     "baja": "259,00",
     "alta": "265,00",
     "precio_cierre": "262,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "BYMAC",
@@ -129,7 +129,7 @@
     "baja": "0,16",
     "alta": "0,17",
     "precio_cierre": "0,17",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "BYMAD",
@@ -141,7 +141,7 @@
     "baja": "0,17",
     "alta": "0,17",
     "precio_cierre": "0,17",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "CEPU",
@@ -153,7 +153,7 @@
     "baja": "2.000,00",
     "alta": "2.120,00",
     "precio_cierre": "2.078,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "COME",
@@ -165,7 +165,7 @@
     "baja": "39,50",
     "alta": "40,95",
     "precio_cierre": "40,47",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "CRES",
@@ -177,7 +177,7 @@
     "baja": "1.998,00",
     "alta": "2.054,00",
     "precio_cierre": "2.033,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "CRESC",
@@ -189,7 +189,7 @@
     "baja": "0,00",
     "alta": "0,00",
     "precio_cierre": "1,22",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "EDN",
@@ -201,7 +201,7 @@
     "baja": "1.865,00",
     "alta": "1.904,00",
     "precio_cierre": "1.881,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "EDNC",
@@ -213,7 +213,7 @@
     "baja": "1,18",
     "alta": "1,18",
     "precio_cierre": "1,18",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "EDND",
@@ -225,7 +225,7 @@
     "baja": "1,22",
     "alta": "1,24",
     "precio_cierre": "1,23",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "GGAL",
@@ -237,7 +237,7 @@
     "baja": "6.610,00",
     "alta": "6.755,00",
     "precio_cierre": "6.685,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "GGALC",
@@ -249,7 +249,7 @@
     "baja": "0,00",
     "alta": "0,00",
     "precio_cierre": "4,18",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "GGALD",
@@ -261,7 +261,7 @@
     "baja": "4,30",
     "alta": "4,39",
     "precio_cierre": "4,36",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "IRSAC",
@@ -273,7 +273,7 @@
     "baja": "0,00",
     "alta": "0,00",
     "precio_cierre": "1,03",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "IRSAD",
@@ -285,7 +285,7 @@
     "baja": "1,60",
     "alta": "1,64",
     "precio_cierre": "1,61",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "LOMA",
@@ -297,7 +297,7 @@
     "baja": "3.020,00",
     "alta": "3.132,50",
     "precio_cierre": "3.045,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "LOMAD",
@@ -309,7 +309,7 @@
     "baja": "1,97",
     "alta": "2,04",
     "precio_cierre": "1,98",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "MIRG",
@@ -321,7 +321,7 @@
     "baja": "1.695,00",
     "alta": "1.840,00",
     "precio_cierre": "1.775,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "PAMP",
@@ -333,7 +333,7 @@
     "baja": "5.110,00",
     "alta": "5.240,00",
     "precio_cierre": "5.215,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "SUPV",
@@ -345,7 +345,7 @@
     "baja": "2.555,00",
     "alta": "2.640,00",
     "precio_cierre": "2.585,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "SUPVD",
@@ -357,7 +357,7 @@
     "baja": "1,67",
     "alta": "1,71",
     "precio_cierre": "1,69",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "TECO2",
@@ -369,7 +369,7 @@
     "baja": "4.300,00",
     "alta": "4.590,00",
     "precio_cierre": "4.392,50",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "TECOC",
@@ -381,7 +381,7 @@
     "baja": "2,83",
     "alta": "2,83",
     "precio_cierre": "2,76",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "TGN4C",
@@ -393,7 +393,7 @@
     "baja": "0,00",
     "alta": "0,00",
     "precio_cierre": "2,10",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "TGN4D",
@@ -405,7 +405,7 @@
     "baja": "2,29",
     "alta": "2,47",
     "precio_cierre": "2,31",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "TGNO4",
@@ -417,7 +417,7 @@
     "baja": "3.492,50",
     "alta": "3.780,00",
     "precio_cierre": "3.532,50",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "TGSU2",
@@ -429,7 +429,7 @@
     "baja": "8.800,00",
     "alta": "9.100,00",
     "precio_cierre": "9.055,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "TRAN",
@@ -441,7 +441,7 @@
     "baja": "3.107,50",
     "alta": "3.225,00",
     "precio_cierre": "3.162,50",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "TXAR",
@@ -453,7 +453,7 @@
     "baja": "654,00",
     "alta": "672,00",
     "precio_cierre": "662,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "TXARD",
@@ -465,7 +465,7 @@
     "baja": "0,43",
     "alta": "0,44",
     "precio_cierre": "0,43",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "VALO",
@@ -477,7 +477,7 @@
     "baja": "542,00",
     "alta": "550,50",
     "precio_cierre": "547,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "VALOC",
@@ -489,7 +489,7 @@
     "baja": "0,34",
     "alta": "0,35",
     "precio_cierre": "0,34",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "VALOD",
@@ -501,7 +501,7 @@
     "baja": "0,36",
     "alta": "0,36",
     "precio_cierre": "0,36",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "YPFD",
@@ -513,7 +513,7 @@
     "baja": "8.400,00",
     "alta": "8.795,00",
     "precio_cierre": "8.760,00",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "YPFDC",
@@ -525,7 +525,7 @@
     "baja": "5,00",
     "alta": "5,43",
     "precio_cierre": "5,60",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   },
   {
     "ticker": "YPFDD",
@@ -537,6 +537,6 @@
     "baja": "5,48",
     "alta": "5,75",
     "precio_cierre": "5,72",
-    "fecha_cierre": "20:00"
+    "fecha_cierre": "21/09/2026"
   }
 ]
