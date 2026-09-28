@@ -72,6 +72,16 @@ def _periodic_scrape(path: str, url: str, interval: int, stop_event: threading.E
 def create_app() -> FastAPI:
     app = FastAPI(title="MateBursatil API", version="0.1.0")
 
+    @app.on_event("startup")
+    def start_scrapper():
+        stop_event = threading.Event()
+        scraper_thread = threading.Thread(
+        target = _periodic_scrape,
+        args=(DATA_PATH, SCRAPE_URL, SCRAPE_INTERVAL, stop_event),
+        daemon=True
+    )
+        scraper_thread.start()
+
     # Ensure data directory exists
     os.makedirs(os.path.dirname(DATA_PATH) or 'data', exist_ok=True)
 
