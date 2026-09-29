@@ -1,52 +1,81 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException
 from typing import List, Dict, Any
 import os
-from datetime import datetime
 
 from api.models import Cotizacion, CotizacionList
-from services.storage import JSONStorage
-from services.scraper import obtener_informe_merval
-
+from supabase import create_client, Client
 
 router = APIRouter()
 
+# Variables de entorno para Supabase
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
-def get_storage() -> JSONStorage:
-    # default path; in a more advanced setup this would be injected/configured
-    return JSONStorage('data/cotizaciones.json')
+# Inicialización del cliente
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+
+def _get_latest_record() -> Dict[str, Any]:
+    """Función auxiliar para obtener la última captura de cotizaciones desde Supabase."""
+    try:
+        response = (
+            supabase.table('cotizaciones')
+            .select('data, created_at')
+            .order('created_at', desc=True)
+            .limit(1)
+            .execute()
+        )
+        if response.data and len(response.data) > 0:
+            return response.data[0]
+    except Exception as e:
+        print(f"[Supabase Error] Error al consultar cotizaciones: {e}")
+    
+    return {"data": [], "created_at": None}
 
 
 @router.get('/')
-def list_shares(limit: int = 200, q: str = '', storage: JSONStorage = Depends(get_storage)) -> Dict[str, Any]:
-    """Return a JSON object with `items` and non-breaking `meta` metadata so
-    the dashboard can consume summary info without frontend changes.
-    """
-    items = storage.read_all()
+def list_shares(limit: int = 200, q: str = '') -> Dict[str, Any]:
+    """Retorna los ítems filtrados y la metadata correspondiente obtenida desde Supabase."""
+    latest_record = _get_latest_record()
+    items = latest_record.get('data', [])
+    created_at = latest_record.get('created_at')
+
+    # Filtrar por parámetro de búsqueda si existe (ticker o nombre)
     if q:
         q_lower = q.lower()
-        items = [i for i in items if q_lower in (i.get('ticker', '') + i.get('nombre', '')).lower()]
+        items = [
+            i for i in items 
+            if q_lower in (i.get('ticker', '') + i.get('nombre', '')).lower()
+        ]
 
     sliced = items[:limit]
 
-    # metadata: total count and last update timestamp (from file mtime when available)
-    meta: Dict[str, Any] = {'totalCount': len(items)}
-    try:
-        path = storage.path
-        if os.path.exists(path):
-            mtime = os.path.getmtime(path)
-            meta['last_updated'] = datetime.fromtimestamp(mtime).isoformat()
-    except Exception:
-        # don't fail the request if metadata cannot be computed
-        pass
+    # Metadata de la última actualización
+    meta: Dict[str, Any] = {
+        'totalCount': len(items),
+        'last_updated': created_at
+    }
 
     return {'items': sliced, 'meta': meta}
 
 
+@router.get('/cotizaciones')
+async def get_cotizaciones():
+    """Endpoint directo para devolver el array completo de cotizaciones actuales."""
+    latest_record = _get_latest_record()
+    return latest_record.get('data', [])
+
+
 @router.get('/{ticker}', response_model=Cotizacion)
-def get_share(ticker: str, storage: JSONStorage = Depends(get_storage)):
-    item = storage.find_by_ticker(ticker)
+def get_share(ticker: str):
+    """Busca una cotización específica por ticker dentro de la última actualización."""
+    latest_record = _get_latest_record()
+    items = latest_record.get('data', [])
+
+    ticker_upper = ticker.upper()
+    item = next((i for i in items if i.get('ticker', '').upper() == ticker_upper), None)
+
     if not item:
         raise HTTPException(status_code=404, detail='No encontrado')
+
     return item
-
-
