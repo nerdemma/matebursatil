@@ -11,7 +11,7 @@ router = APIRouter()
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
-# Inicialización del cliente
+#inicializacion con el cliente de db
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
