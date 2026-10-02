@@ -58,6 +58,7 @@ def list_shares(limit: int = 200, q: str = '') -> Dict[str, Any]:
 
     return {'items': sliced, 'meta': meta}
 
+# obtener cotizaciones
 
 @router.get('/cotizaciones')
 async def get_cotizaciones():
@@ -65,6 +66,7 @@ async def get_cotizaciones():
     latest_record = _get_latest_record()
     return latest_record.get('data', [])
 
+# Obtener Cotizacion
 
 @router.get('/{ticker}', response_model=Cotizacion)
 def get_share(ticker: str):
